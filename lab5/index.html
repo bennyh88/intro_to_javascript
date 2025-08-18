@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 40%;
+        }
+
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        tr:nth-child(even){background-color: #f2f2f2;}
+
+        tr:hover {background-color: #ddd;}
+    </style>
+</head>
+<body>
+    <h2>Day of the week</h2>
+    <div id="day-of-the-week"></div>
+
+    <h2>1-100 Added</h2>
+    <div id="sum-1-100"></div>
+
+    <h2>for loop example</h2>
+    <div id="for_loop_ex"></div>
+
+    <h2>Multiplication Table</h2>
+    <div id="mt"></div>
+
+
+    <script>
+        let dotw = document.getElementById("day-of-the-week");
+        dotw.innerHTML = getDay();
+
+        let sum_1_100 = document.getElementById("sum-1-100");
+        sum_1_100.innerHTML = add_while_loop(1, 100);
+
+        let for_loop_ex = document.getElementById("for_loop_ex");
+        for_loop_ex.innerHTML = for_loop(1, 100);
+
+        let mt = document.getElementById("mt");
+        mt.innerHTML = multiplication_table(1,11);
+
+        
+        function getDay() {
+            const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            const d = new Date();
+            return weekday[d.getDay()];
+        }
+
+        function add_while_loop(min, max) {
+            let total = 0;
+            while (min <= max) {
+                total += min;
+                min++;
+            }
+            console.log(total);
+            return total;
+        }
+
+        function for_loop(min, max) {
+            result = '';
+            total = 0;
+            for (let i=0; i<=max; i++) {
+                if (i%2 == 1) {
+                    result = result + i + ',';
+                    total += i;
+                }
+            }
+            result = result + '<br> Total = ' + total 
+            return result;
+        }
+
+        function multiplication_table(min, max) {
+            result = '<table>';
+            for (let row=min; row<=max; row++) {
+                result += '<tr>';
+                for (let col=min; col<=max; col++) {
+                    //table += `<span class='cell'>${row * column}</span>`
+                    result += `<td>${row * col}</td>`;
+                }
+                result += '</tr>';
+            }
+            result += '</table>';
+            return result;
+        }
+
+
+
+        function checkLogin() {
+            username = document.getElementById("username").value;
+            password = document.getElementById("password").value;
+
+            //console.log(password);
+
+            if (username.length < 2 || password.length < 8) {
+                alert('Login Failed!');
+            } else if (!/\d/.test(password)) {
+                alert('Login Failed!\nPassword must contain a number');
+            } else {
+                alert('Login Successful!');
+            }
+        }
+    </script>
+</body>
+</html>

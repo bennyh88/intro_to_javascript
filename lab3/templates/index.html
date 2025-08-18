@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Index</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/stylesheets/lab-style.css'>
+    <script src="/static/scripts/javascript1.js"></script>
+    <script src='main.js'></script>
+    <script>
+        alert('Hello World!');
+    </script>
+
+</head>
+<body onload="alert('Loading!')">
+    <button onclick="confirm('Are you sure?')">Delete</button>
+    <form class="join-page" action="/action_page" method="post" target="_blank">
+        <h1>Join the Tech Explorers Club</h1>
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <label for="name">Full Name:</label><br>
+            <input type="text" id="name" name="name" placeholder="Full Name"><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" placeholder="name.company@example.com"><br>
+
+            <label for="age">Age:</label><br>
+            <input type="number" id="age" name="age" placeholder="years"><span id="years-span"></span><br>
+        </fieldset>
+        <fieldset>
+            <legend>Preferences</legend>
+            <label for="user-type">User Type:</label><br>
+            <div class="cb-radio-container" id="user-type">
+                <div class="cb-radio-pair">
+                    <label for="student" class="radio-label">Student:</label>
+                    <input type="radio" id="student" name="user-type" value="student">
+                </div>
+                <div class="cb-radio-pair">
+                    <label for="professional" class="radio-label">Professional:</label>
+                    <input type="radio" id="professional" name="user-type" value="professional">
+                </div>
+                <div class="cb-radio-pair">
+                    <label for="hobbyist" class="radio-label">Hobbyist:</label>
+                    <input type="radio" id="hobbyist" name="user-type" value="hobbyist">
+                </div>
+            </div>
+            <label for="interests">Interests:</label><br>
+            <div class="cb-radio-container" id="interests">
+                <div class="cb-radio-pair">
+                    <label for="ai" class="cb-label">AI:</label>
+                    <input type="checkbox" id="ai" name="interests" value="ai">
+                </div>
+                <div class="cb-radio-pair">
+                    <label for="web" class="cb-label">Web:</label>
+                    <input type="checkbox" id="web" name="interests" value="web">
+                </div>
+                <div class="cb-radio-pair">
+                    <label for="cyber-security" class="cb-label">Cyber Security:</label>
+                    <input type="checkbox" id="cyber-security" name="interests" value="cyber-security">
+                </div>
+            </div>
+            <label for="favourite-language">Favourite Language:</label><br>
+            <select name="favourite-language" id="favourite-language">
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="javascript">Javascript</option>
+                <option value="c#">C#</option>
+            </select><br>
+        </fieldset>
+        <fieldset>
+            <legend>Bio</legend>
+            <label for="bio">Why do you want to join?</label><br>
+            <textarea id="bio" name="bio" placeholder="write a short paragraph about yourself"></textarea>
+        </fieldset>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

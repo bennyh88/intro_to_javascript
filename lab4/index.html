@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login Form</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username"><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password"><br><br>
+
+    <button onclick="checkLogin()">Login</button>
+
+    <p id="message"></p>
+
+    <script>
+        function checkLogin() {
+            username = document.getElementById("username").value;
+            password = document.getElementById("password").value;
+
+            //console.log(password);
+
+            if (username.length < 2 || password.length < 8) {
+                alert('Login Failed!');
+            } else if (!/\d/.test(password)) {
+                alert('Login Failed!\nPassword must contain a number');
+            } else {
+                alert('Login Successful!');
+            }
+        }
+    </script>
+</body>
+</html>
