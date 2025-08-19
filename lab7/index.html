@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            /* width: 40%; */
+        }
+
+        td, th {
+            border: 1px solid #ddd;
+            padding: 15px;
+            width: auto;
+            text-align: center;
+        }
+
+        td:nth-child(even){background-color: #c9b3b3;}
+        tr:nth-child(even){background-color: #ddd;}
+        
+        tr:hover {background-color: #49b9c1;}
+        td:hover {background-color: #d86666;}
+
+        ul {
+            width:300px;
+        }
+
+        li:hover {
+            cursor: pointer;
+            background-color: #49b9c1;
+        }
+        .Priority-1 {
+            color:red;
+        }
+        .Priority-2 {
+            color:green;
+        }
+        .Priority-3 {
+            color:blue;
+        }
+        .Priority-4 {
+            color:brown;
+        }
+        .Priority-5 {
+            color:black;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+
+    <label for="task_input">Task Description:</label>
+    <input id="task_input" type="text"><br><br>
+
+    <label for="task_priority_input">Task Priority:</label>
+    <input id="task_priority_input" type="text"><br><br>
+    
+    <button onclick='addTask();'>Add Task</button><br>
+
+    <h2>Task List</h2>
+    <ul id="task_list">
+
+    </ul>
+    
+
+
+
+    <script>
+
+        const task_priority_input = document.getElementById("task_priority_input");
+        const task_input = document.getElementById("task_input");
+
+        task_priority_input.addEventListener("keypress", 
+            (e) => {
+                if (e.key === "Enter") {
+                    event.preventDefault();
+                    if (task_input.value) {
+                        addTask();
+                    } else {
+                        task_input.focus();
+                    }
+                }
+            }
+        );
+
+        task_input.addEventListener("keypress", 
+            (e) => {
+                if (e.key === "Enter") {
+                    event.preventDefault();
+                    if (task_priority_input.value) {
+                        addTask();
+                    } else {
+                        task_priority_input.focus();
+                    }
+                }
+            }
+        );
+
+        function addTask() {
+            priority_classes = ["Priority-1", "Priority-2", "Priority-3", "Priority-4", "Priority-5"]
+            let li = document.createElement('li');
+    
+            let priority_index = Number(document.getElementById("task_priority_input").value)-1;
+
+            // Handle out of range
+            if (priority_index > priority_classes.length) {
+                priority_index = priority_classes.length-1
+            }
+
+            li.className = priority_classes[priority_index];
+            li.textContent = priority_classes[priority_index] + ': ' + document.getElementById("task_input").value;
+            
+            li.addEventListener("click", 
+            (e) => {
+                
+                let text = "Are you sure you want to delete the task:\n" + e.srcElement.textContent;
+                if (confirm(text) == true) {
+                    e.srcElement.remove();
+                }
+            });
+
+            const task_list = document.getElementById("task_list");
+            task_list.appendChild(li);
+
+        }
+
+    </script>
+</body>
+</html>

@@ -25,67 +25,47 @@
     </style>
 </head>
 <body>
-    <h2>Day of the week</h2>
+    <!-- <h2>Day of the week</h2>
     <div id="day-of-the-week"></div>
 
     <h2>1-100 Added</h2>
     <div id="sum-1-100"></div>
 
     <h2>for loop example</h2>
-    <div id="for_loop_ex"></div>
+    <div id="for_loop_ex"></div> -->
 
     <h2>Multiplication Table</h2>
+    <input id="mt_columns" type="number" value="10">
+    <input id="mt_rows" type="number" value="10">
+    <button id="generate_table">Create Table</button>
+    <br>
+<!-- </button>onclick=document.getElementById("mt").innerHTML = multiplication_table(document.getElementById("mt_columns").value, document.getElementById('mt_rows').value)>Create Table</button> -->
     <div id="mt"></div>
 
 
+
     <script>
-        let dotw = document.getElementById("day-of-the-week");
-        dotw.innerHTML = getDay();
-
-        let sum_1_100 = document.getElementById("sum-1-100");
-        sum_1_100.innerHTML = add_while_loop(1, 100);
-
-        let for_loop_ex = document.getElementById("for_loop_ex");
-        for_loop_ex.innerHTML = for_loop(1, 100);
-
-        let mt = document.getElementById("mt");
-        mt.innerHTML = multiplication_table(1,11);
+        // Register OnClick listener for the button
+        document.getElementById("generate_table").addEventListener(
+            "click", 
+            (e) => {
+                //console.log(e);
+                document.getElementById("mt").innerHTML = multiplication_table( 
+                    document.getElementById("mt_columns").value, 
+                    document.getElementById('mt_rows').value
+                );
+            }
+        );
 
         
-        function getDay() {
-            const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-            const d = new Date();
-            return weekday[d.getDay()];
-        }
+        let mt = document.getElementById("mt");
+        mt.innerHTML = multiplication_table(5,3);
 
-        function add_while_loop(min, max) {
-            let total = 0;
-            while (min <= max) {
-                total += min;
-                min++;
-            }
-            console.log(total);
-            return total;
-        }
-
-        function for_loop(min, max) {
-            result = '';
-            total = 0;
-            for (let i=0; i<=max; i++) {
-                if (i%2 == 1) {
-                    result = result + i + ',';
-                    total += i;
-                }
-            }
-            result = result + '<br> Total = ' + total 
-            return result;
-        }
-
-        function multiplication_table(min, max) {
+        function multiplication_table(cols, rows) {
             result = '<table>';
-            for (let row=min; row<=max; row++) {
+            for (let row=1; row<=rows; row++) {
                 result += '<tr>';
-                for (let col=min; col<=max; col++) {
+                for (let col=1; col<=cols; col++) {
                     result += `<td>${row * col}</td>`;
                 }
                 result += '</tr>';
@@ -110,6 +90,7 @@
                 alert('Login Successful!');
             }
         }
+
     </script>
 </body>
 </html>
