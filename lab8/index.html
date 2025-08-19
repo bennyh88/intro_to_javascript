@@ -49,7 +49,7 @@
 
     </style>
 </head>
-<body>
+<body onload="loadItems()">
     <h1>To-Do List</h1>
 
     <label for="task_input">Task Description:</label>
@@ -58,13 +58,24 @@
     <label for="task_priority_input">Task Priority:</label>
     <input id="task_priority_input" type="text"><br><br>
 
-    <button onclick='addTask();'>Add Task</button><br>
+    <button onclick='addTask();'>Add Task</button>
+    <button onClick='saveToLocalStorage();'>Save to Local Storage</button><br><br>
 
     <h2>Task List</h2>
     <ul id="task_list"></ul>
     
 
     <script>
+
+        let tasks = [];
+
+        class Task {
+
+            constructor(task_priority, task_description) {
+                this.task_priority = task_priority;
+                this.task_description = task_description;
+            }
+        }
 
         const task_priority_input = document.getElementById("task_priority_input");
         const task_input = document.getElementById("task_input");
@@ -95,6 +106,41 @@
             }
         );
 
+        function saveToLocalStorage() {
+            console.log(tasks);
+            localStorage.setItem("taskItems", JSON.stringify(tasks));
+
+        }
+
+        function loadItems() {
+            let items = localStorage.getItem("taskItems");
+            tasks = JSON.parse(items);
+            console.log(items);
+            console.log(tasks);
+
+            priority_classes = ["Priority-1", "Priority-2", "Priority-3", "Priority-4", "Priority-5"]
+            const task_list = document.getElementById("task_list");
+            
+            for (let task of tasks) {
+                let li = document.createElement('li');
+                li.className = priority_classes[task.task_priority];
+                li.textContent = priority_classes[task.task_priority] + ': ' + task.task_description;
+                li.addEventListener("click", (e) => {
+                    let text = "Are you sure you want to delete the task:\n" + e.srcElement.textContent;
+                    if (confirm(text) == true) {
+                        //console.log(tasks.findIndex(t => ((t.priority_classes[t.task_priority] + ': ' + t.task_description) === e.srcElement.textContent)))
+                        //console.log(e.srcElement.textContent);
+                        //console.log(tasks.map(t => (priority_classes[t.task_priority] + ': ' +t.task_description)).indexOf(e.srcElement.textContent))
+                        tasks.splice(tasks.map(t => (priority_classes[t.task_priority] + ': ' +t.task_description)).indexOf(e.srcElement.textContent), 1);
+                        //console.log(tasks);
+                        saveToLocalStorage();
+                        e.srcElement.remove();
+                    }
+                });
+                task_list.appendChild(li);
+            }
+        }
+
         function addTask() {
             priority_classes = ["Priority-1", "Priority-2", "Priority-3", "Priority-4", "Priority-5"]
             let li = document.createElement('li');
@@ -114,9 +160,14 @@
                 
                 let text = "Are you sure you want to delete the task:\n" + e.srcElement.textContent;
                 if (confirm(text) == true) {
+                    tasks.splice(tasks.map(t => (priority_classes[t.task_priority] + ': ' +t.task_description)).indexOf(e.srcElement.textContent), 1);
+                    saveToLocalStorage();
                     e.srcElement.remove();
                 }
             });
+
+            // Make a new Task Object
+            tasks.push(new Task(priority_index, document.getElementById("task_input").value));
 
             const task_list = document.getElementById("task_list");
             task_list.appendChild(li);
